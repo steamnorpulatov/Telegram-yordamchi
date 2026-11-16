@@ -3,3 +3,4 @@ pydub
 mutagen
 Pillow
 audioread
+aiohttp
