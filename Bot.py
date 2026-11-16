@@ -12,8 +12,8 @@ from aiohttp import web
 # ================= SOZLAMALAR =================
 BOT_TOKEN = "9200155582:AAGTpgo3RM8DqfuEoGgDyEOC9ptIu4fTbr0"
 CHANNEL_ID = "@zawenbeats_bass"       # Masalan: @uz_music_vip
-CHANNEL_LINK_TEXT = "\n\n🔥 @sizning_kanalingiz" # Postlar tagidagi yozuv
-CHANNEL_TITLE_TAG = "@sizning_kanalingiz" # Musiqa nomiga qo'shiladigan nom
+CHANNEL_LINK_TEXT = "\n\n⚜️ @zawenbeats_bass " # Postlar tagidagi yozuv
+CHANNEL_TITLE_TAG = "@zawenbeats_bass" # Musiqa nomiga qo'shiladigan nom
 ADMIN_ID = 1940953290                     # O'zingizning Telegram ID raqamingiz
 COVER_IMAGE = "cover.jpg"                # Musiqa rasmi (oblojka) fayli
 # ==============================================
@@ -104,7 +104,7 @@ async def handle_audio(message: types.Message):
         await bot.send_voice(
             chat_id=CHANNEL_ID,
             voice=FSInputFile(preview_ogg_path),
-            caption=f"🎧 **Premyera namunasi (30s):** {orig_title}{CHANNEL_LINK_TEXT}",
+            caption=f"🎧прослушка",
    
         )
 
