@@ -2,3 +2,4 @@ aiogram
 pydub
 mutagen
 Pillow
+audioread
