@@ -105,7 +105,7 @@ async def handle_audio(message: types.Message):
             chat_id=CHANNEL_ID,
             voice=FSInputFile(preview_ogg_path),
             caption=f"🎧 **Premyera namunasi (30s):** {orig_title}{CHANNEL_LINK_TEXT}",
-            parse_mode="Markdown"
+   
         )
 
         thumb_file = FSInputFile(COVER_IMAGE) if os.path.exists(COVER_IMAGE) else None
