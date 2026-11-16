@@ -1,0 +1,4 @@
+aiogram
+pydub
+mutagen
+Pillow
