@@ -7,6 +7,7 @@ from pydub import AudioSegment
 from mutagen.mp3 import MP3
 from mutagen.id3 import ID3, TIT2, TPE1, APIC
 from PIL import Image
+from aiohttp import web
 
 # ================= SOZLAMALAR =================
 BOT_TOKEN = "9200155582:AAGTpgo3RM8DqfuEoGgDyEOC9ptIu4fTbr0"
@@ -70,7 +71,7 @@ async def handle_audio(message: types.Message):
         file = await bot.get_file(audio.file_id)
         await bot.download_file(file.file_path, input_path)
 
-        # A) 30 soniyalik namuna kesish va OGG formatiga o'tkazish (Ovozli xabar uchun)
+        # A) 30 soniyalik namuna kesish va OGG formatiga o'tkazish
         sound = AudioSegment.from_file(input_path)
         thirty_sec = sound[:30 * 1000]
         thirty_sec.export(preview_ogg_path, format="ogg", codec="libopus")
@@ -100,7 +101,6 @@ async def handle_audio(message: types.Message):
         mp3_file.save()
 
         # C) Kanalga ketma-ket yuborish
-        # 1. 30 soniyali parcha Ovozli xabar (Voice message) ko'rinishida
         await bot.send_voice(
             chat_id=CHANNEL_ID,
             voice=FSInputFile(preview_ogg_path),
@@ -108,7 +108,6 @@ async def handle_audio(message: types.Message):
             parse_mode="Markdown"
         )
 
-        # 2. To'liq musiqa (yangi nom va rasm bilan)
         thumb_file = FSInputFile(COVER_IMAGE) if os.path.exists(COVER_IMAGE) else None
         original_caption = message.caption or ""
         final_caption = f"{original_caption}{CHANNEL_LINK_TEXT}".strip()
@@ -122,7 +121,7 @@ async def handle_audio(message: types.Message):
             caption=final_caption
         )
 
-        await status_msg.edit_text("✅ Namuna (ovozli xabar) va to'liq musiqa kanalga joylandi!")
+        await status_msg.edit_text("✅ Namuna va to'liq musiqa kanalga joylandi!")
 
     except Exception as e:
         await status_msg.edit_text(f"❌ Xatolik yuz berdi: {e}")
@@ -174,11 +173,24 @@ async def handle_text(message: types.Message):
     )
     await message.answer("✅ Matnli post kanalga joylandi!")
 
+# ================= RENDER PORT UCHUN SERVER VA BOTNI ISHGA TUSHIRISH =================
+async def handle_web(request):
+    return web.Response(text="Bot is running!")
+
 async def main():
-    print("Bot ishga tushdi...")
+    # Aiohttp orqali Render talab qiladigan portni ochamiz
+    app = web.Application()
+    app.router.add_get("/", handle_web)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    
+    port = int(os.environ.get("PORT", 10000))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    print(f"Veb-server {port} portda muvaffaqiyatli ochildi.")
+
+    print("Bot polling boshlandi...")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
-  
-  
