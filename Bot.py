@@ -11,7 +11,7 @@ from aiohttp import web
 
 # ================= SOZLAMALAR =================
 BOT_TOKEN = "9200155582:AAGTpgo3RM8DqfuEoGgDyEOC9ptIu4fTbr0"
-CHANNEL_ID = "https://t.me/zawenbeats_bass"       # Masalan: @uz_music_vip
+CHANNEL_ID = "@zawenbeats_bass"       # Masalan: @uz_music_vip
 CHANNEL_LINK_TEXT = "\n\n🔥 @sizning_kanalingiz" # Postlar tagidagi yozuv
 CHANNEL_TITLE_TAG = "@sizning_kanalingiz" # Musiqa nomiga qo'shiladigan nom
 ADMIN_ID = 1940953290                     # O'zingizning Telegram ID raqamingiz
