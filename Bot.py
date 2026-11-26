@@ -13,7 +13,7 @@ from aiohttp import web
 BOT_TOKEN = "9200155582:AAGTpgo3RM8DqfuEoGgDyEOC9ptIu4fTbr0"
 CHANNEL_ID = "@zawenbeats_bass"       # Masalan: @uz_music_vip
 CHANNEL_LINK_TEXT = "\n\n⚜️ @zawenbeats_bass " # Postlar tagidagi yozuv
-CHANNEL_TITLE_TAG = "@zawenbeats_bass" # Musiqa nomiga qo'shiladigan nom
+CHANNEL_TITLE_TAG = "@zawenbeats_bass " # Musiqa nomiga qo'shiladigan nom
 ADMIN_ID = 1940953290                     # O'zingizning Telegram ID raqamingiz
 COVER_IMAGE = "cover.jpg"                # Musiqa rasmi (oblojka) fayli
 # ==============================================
